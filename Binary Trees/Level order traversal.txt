@@ -1,0 +1,21 @@
+//problem Link ->  https://practice.geeksforgeeks.org/problems/level-order-traversal/1
+
+   vector<int> levelOrder(Node* node)
+    {
+        vector<int>res;
+        queue<Node*>q;
+        q.push(node);
+        while(!q.empty()){
+            int level_size=q.size();
+            while(level_size--){
+                Node* temp=q.front();
+                res.push_back(temp->data);
+                q.pop();
+                if(temp->left)q.push(temp->left);
+                if(temp->right)q.push(temp->right);
+            }
+        }
+        return res;
+    }
+    // Time Complexity -> O(n)
+    // Space Complexity -> O(n)

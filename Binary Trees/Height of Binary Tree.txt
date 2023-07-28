@@ -1,0 +1,37 @@
+    
+// problem link -> https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1 
+    int solve_rec(Node*root){
+        if(root==NULL)return 0;
+        int left=solve_rec(root->left);
+        int right=solve_rec(root->right);
+        return max(left,right)+1;
+    }
+    int sovle_iterative(Node* root){
+        int height=0;
+        queue<Node*>q;
+        q.push(root);
+        while(!q.empty()){
+            int level_size=q.size();
+            height++;
+            while(level_size--){
+                Node* temp=q.front();
+                q.pop();
+                if(temp->left)q.push(temp->left);
+                if(temp->right)q.push(temp->right);
+            }
+        }
+        return height;
+    }
+    int height(struct Node* node){
+        // recursive
+        // return solve_rec(node);
+        // Iterative
+        return sovle_iterative(node);
+    }
+    // Recursive - solve_rec
+    // Time Complexity -> O(n)
+    // Space Complexity ->O(n)  //function stack  
+    
+    // Iterative -solve_iterative
+    // Time Complexity -> O(n)
+    // Space Complexity ->O(n)
