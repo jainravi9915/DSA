@@ -1,0 +1,30 @@
+Problem Link -> https://practice.geeksforgeeks.org/batch/gts-1/track/GTS-ARRAY/problem/majority-element-1587115620  
+
+   // Function to find majority element in the array
+    // a: input array
+    // size: size of input array
+    
+    int majorityElement(int a[], int size)
+    {
+        
+        int possible=INT_MAX,cnt=0;
+        for(int i=0; i<size; i++){
+            if(a[i]==possible){
+                cnt++;
+            }else{
+                cnt--;
+            }
+            if(cnt<0){
+                possible=a[i];
+                cnt=1;
+            }
+        }
+        cnt=0;
+        for(int i=0;i<size; i++){
+            if(a[i]==possible)cnt++;
+        }
+        return cnt>size/2 ? possible : -1;
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(1)
+

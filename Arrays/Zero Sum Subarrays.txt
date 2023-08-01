@@ -1,0 +1,18 @@
+Problem Link -> https://practice.geeksforgeeks.org/batch/gts-1/track/GTS-ARRAY/problem/zero-sum-subarrays1825
+
+   long long int findSubarray(vector<long long int> &arr, int n ) {
+        map<int,int>mp;
+        long long int sum=0,res=0,k=0;
+        for(int i=0; i<n; i++){
+            sum+=arr[i];
+            if(sum==k)res++;
+            if(mp.find(sum-k)!=mp.end()){
+                res+=mp[sum-k];
+            }
+            mp[sum]++;
+        }
+        return res;
+    }
+
+// Time Complexity -> O(N*log(N))
+//Space Complexity -> O(N)

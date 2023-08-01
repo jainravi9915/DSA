@@ -1,0 +1,41 @@
+
+// problem Link -> https://practice.geeksforgeeks.org/problems/inorder-traversal/1
+
+
+    vector<int> solve_iterative(Node* root){
+        vector<int>in_oder;
+        stack<Node*>stk;
+        while(!stk.empty() || root){
+            // left data right
+            if (root){
+                stk.push(root);
+                root=root->left;
+            }else{
+                root=stk.top();stk.pop(); 
+                in_oder.push_back(root->data);
+                root=root->right;
+            }
+        }
+        return in_oder;
+    }
+    void solve_rec(Node* root,vector<int>&res){
+        if(root ==NULL)return ;
+        solve_rec(root->left,res);
+        res.push_back(root->data);
+        solve_rec(root->right,res);
+    }
+    vector<int> inOrder(Node* root) {
+        //iterative 
+        return solve_iterative(root);
+        // recursive
+        // vector<int>res;
+        // solve_rec(root,res);
+        // return res;
+    }
+    // Iteractive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)
+    
+    // Recursive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N) function stack
