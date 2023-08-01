@@ -1,0 +1,40 @@
+// Problem Link -> https://leetcode.com/problems/binary-tree-postorder-traversal/description/
+
+  vector<int> solve_iterative(TreeNode* root) {
+        vector<int>res;
+        if(root==NULL)return {};
+        stack<TreeNode*>s1,s2;
+        s1.push(root);
+        while(!s1.empty()){
+            root=s1.top();s1.pop();
+            s2.push(root);
+            if(root->left)s1.push(root->left);
+            if(root->right)s1.push(root->right);
+        }
+        while(s2.empty()==false){
+            res.push_back(s2.top()->val);
+            s2.pop();
+        }
+        return res;
+    }
+    void solve_rec(TreeNode* root,vector<int>&res){
+        if(root==NULL)return ;
+        solve_rec(root->left,res);
+        solve_rec(root->right,res);
+        res.push_back(root->val);
+    }
+    vector<int>postorderTraversal(TreeNode* root){
+        //iterative
+        return solve_iterative(root);
+        // recursive
+        vector<int>res;
+        solve_rec(root,res);
+        return res;
+    }
+        // Iteractive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)+ O(N)
+    
+    // Recursive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N) function stack

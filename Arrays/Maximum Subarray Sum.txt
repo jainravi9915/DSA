@@ -1,0 +1,16 @@
+Problem Link -> https://practice.geeksforgeeks.org/batch/gts-1/track/GTS-ARRAY/problem/kadanes-algorithm-1587115620
+
+	// arr: input array
+    // n: size of array
+    //Function to find the sum of contiguous subarray with maximum sum.
+    long long maxSubarraySum(int arr[], int n){
+        
+        long long curr=arr[0],maximum=arr[0];
+        for(int i=1; i<n; i++){
+            curr= max(curr+arr[i],arr[i]*1ll); //add or start new array
+            maximum=max(maximum,curr);
+        }
+        return maximum;   
+    }
+    //Time Complexity -> O(N)
+    // Space Complexity ->  O(1)

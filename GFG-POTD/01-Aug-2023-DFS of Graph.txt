@@ -1,0 +1,25 @@
+problem Link -> https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+
+// Function to return a list containing the DFS traversal of the graph.
+    void dfs(vector<int>adj[],int src, vector<int>&vis,vector<int>&res){
+        vis[src]=true;
+        res.push_back(src);
+        for(int u:adj[src]){
+            if(vis[u]==false){
+                dfs(adj,u,vis,res);
+            }
+        }
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<int>res,vis(V);
+        dfs(adj,0,vis,res);
+        return res;
+    }
+    //Time Complexity -> O(V+E)
+    // Space Complexity  -> O(V)
+
+//Explanation-> Normal DFS Traversal 
+// Steps 
+// 1. Go to vertex src mark as visited and store in result
+// 2. Traverse all its unvisited adjacency vertex.
+// 3. recursively follow step 1 and 2 untill all vertex visited.

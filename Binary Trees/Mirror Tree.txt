@@ -1,0 +1,11 @@
+// problem statement -> https://practice.geeksforgeeks.org/problems/mirror-tree/1
+
+	
+    void mirror(Node* node) {
+        if(node==NULL)return ;
+        mirror(node->left);
+        mirror(node->right);
+        swap(node->left,node->right);
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N) // function stack

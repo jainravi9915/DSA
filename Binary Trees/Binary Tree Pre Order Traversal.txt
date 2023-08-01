@@ -1,0 +1,41 @@
+
+// Problem Link -> https://leetcode.com/problems/binary-tree-preorder-traversal/description/
+
+    vector<int>solve_iterative(TreeNode* root){
+          if(root==NULL)return {};
+        stack<TreeNode*>stk;
+        
+        stk.push(root);
+        vector<int>pre_order;
+        while(!stk.empty()){
+            TreeNode* temp=stk.top();
+            stk.pop();
+            pre_order.push_back(temp->val);
+            if(temp->right)
+                stk.push(temp->right);
+            if(temp->left)
+                stk.push(temp->left);
+        }
+        return pre_order;
+    }
+    void solve_recursive(TreeNode* root,vector<int>&res){
+        if(root==NULL)return ;
+        res.push_back(root->val);
+        solve_recursive(root->left,res);
+        solve_recursive(root->right,res);
+        
+        
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>result;
+        solve_recursive(root,result);
+        return result;
+        // return solve_iterative(root)
+    }
+    // Iterataive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)
+
+    // Recursive
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)
