@@ -1,0 +1,34 @@
+Problem Link-> https://leetcode.com/problems/combinations/description/    
+
+   void solve(int index,int n,int k,vector<int>&curr,vector<vector<int>>&res){
+        if(curr.size()==k){
+            res.push_back(curr);
+        }
+        if(index>n ||curr.size()>k)return ;
+        // pick
+        for(int i=index; i<=n; i++){
+            curr.push_back(i);
+            solve(i+1,n,k,curr,res);
+            curr.pop_back();
+        }
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<int>curr;
+        vector<vector<int>>res;
+        solve(1,n,k,curr,res);
+        return res;
+    }
+    // Time Complexity ->  O(2^n)
+    // Space Complexity -> O(K*nck)
+
+    // Explanation -> check all possible combination with condition as lenght =K
+    // Steps 
+    // 1. Start
+    // 2. call solve(1,n,k,curr,res) -- 1 is the rannge start from 1, n ,k,curr is at current level elemens vector has, res will stores the result.
+    // 3. check if curr.size()==k then store to result.
+    // 4. if goes out ofn our scope then return ;
+    // 5. for all elemetns from index to N 
+        // a. Store in curr
+        // b. move to next call with index+1
+        // c. pop back from curr
+    //6. Exit
