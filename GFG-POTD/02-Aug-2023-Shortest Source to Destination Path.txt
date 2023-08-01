@@ -1,0 +1,96 @@
+
+class Solution {
+  public:
+    int res=INT_MAX;
+    void dfs(vector<vector<int>>&A,int i,int j,int x,int y,int n,int m,int steps){
+        if(i<0 || j<0 || i>=n || j>=m || A[i][j]!=1)return ;
+        if(i==x and j==y){
+            res=min(res,steps);
+            return ;
+        }
+        A[i][j]=0;
+        dfs(A,i,j-1,x,y,n,m,steps+1);
+        dfs(A,i,j+1,x,y,n,m,steps+1);
+        dfs(A,i-1,j,x,y,n,m,steps+1);
+        dfs(A,i+1,j,x,y,n,m,steps+1);
+
+        A[i][j]=1;
+        
+    }
+    bool isSafe(vector<vector<int>>&A,int i,int j,int n,int m){
+        return (i<0 || j<0 || i>=n || j>=m || A[i][j]!=1 )? false :true;
+    }
+    int bfs(vector<vector<int>>&A,int x,int y,int n,int m){
+        queue<pair<int,int>>q;
+        int  steps=0;
+        q.push({0,0});
+        if(A[0][0]==0)return -1;
+        while(!q.empty()){
+            int size=q.size();
+            while(size--){
+                int i=q.front().first;
+                int j=q.front().second;
+                q.pop();
+                if(i==x && y==j)return steps;
+                
+                if(isSafe(A,i+1,j,n,m)){
+                    A[i+1][j]=0;
+                    q.push({i+1,j});
+                }
+                if(isSafe(A,i-1,j,n,m)){
+                    A[i-1][j]=0;
+                    q.push({i-1,j});
+                }
+                if(isSafe(A,i,j+1,n,m)){
+                    A[i][j+1]=0;
+                    q.push({i,j+1});
+                }
+                if(isSafe(A,i,j-1,n,m)){
+                    A[i][j-1]=0;
+                    q.push({i,j-1});
+                }
+            }
+            steps++;
+        }
+        return -1;
+    }
+    int shortestDistance(int N, int M, vector<vector<int>> A, int X, int Y) {
+        //bfs 
+        return bfs(A,X,Y,N,M);
+        
+        //DFS 
+        // res=INT_MAX;
+	int  steps=0;
+        // dfs(A,0,0,X,Y,N,M,steps);
+        // return res ==INT_MAX ? -1 :res;
+    }
+    //Time Complexity BFS O(N*M) DFS O(N^M)
+    //Space Complexity BFS O(N*M) DFS O(N^M)stack call trace  
+};
+//Explanation-BFS
+// Steps
+// 1. Start
+// 2. Check if starting cell itself having 0  ? follow below steps : return -1
+// 2. create a queue to store the current cell in FIFO manner
+// 3. process till queue becomes empty
+// 	3(A). traverse all it's ajacent in bfs manner - level by level manner
+//		(a).  check it is destination if it is return steps
+//		(b) if not check for if left,right,up,down is safe or not and mark them visited if possible to visit them.
+// 4. if queue ends and did not return anything that means there is no path to destination since return -1;
+// 5. Exit
+
+//Explanation-DFS 
+// 1. Start
+// 2. make res and stores result in that.(we can also pass it to function)
+// 3. call dfs(A,0,0,X,Y,N,M,steps); 0,0 is starting cell 
+//	(a). check for safe condition
+//	(b). check if destionation of not if it is update res=min(res,steps)
+//	(c) call dfs for left right up down with steps+1 
+//      (d) continue to traverse till it ends.
+// 4. return res ==INT_MAX ? -1 :res;
+// 5. Exit
+
+		
+
+
+
