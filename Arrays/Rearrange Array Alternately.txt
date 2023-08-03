@@ -1,0 +1,25 @@
+Problem Link -> https://practice.geeksforgeeks.org/batch/gts-1/track/GTS-ARRAY/problem/-rearrange-array-alternately-1587115620
+
+//Function to rearrange  the array elements alternately.
+    void rearrange(long long *arr, int n) 
+    { 
+        int l=0,r=n-1,max=10000001;
+        for(int i=0; i<n; i++){
+            if(i%2==0){
+                arr[i]= arr[r--]%max*max+arr[i];
+            }else{
+                arr[i]=arr[l++]%max*max+arr[i] ;
+            }
+        }
+        for(int i =0; i<n; i++){
+            arr[i]=arr[i]/max;
+        }
+    }
+// Explanation :
+// tries to store two value at same index and %and *with >=max+1 number 
+// arr[i]    = r-for even,l-for odd + arr[i]    
+// updatedValue= (new_value%max *max)+(old_value)
+// res[i]=arr[i]/max
+
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(1)

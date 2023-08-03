@@ -1,0 +1,26 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
+
+//Function to return a list containing the bottom view of the given tree.
+    vector <int> bottomView(Node *root) {
+        map<int,int>mp;
+        queue<pair<Node*,int>>q;
+        q.push({root,0});
+        vector<int>res;
+        while(!q.empty()){
+            int n=q.size();
+            while(n--){
+             Node* temp=q.front().first;
+             int mark=q.front().second;
+             q.pop();
+             mp[mark]=temp->data;
+             if(temp->left)q.push({temp->left,mark-1});
+             if(temp->right)q.push({temp->right,mark+1});
+            }
+        }
+        for(auto p:mp){
+            res.push_back(p.second);
+        }
+        return res;
+    }
+    //Time Complexity  -> O(N*logN)
+    //Space Complexity -> O(N)
