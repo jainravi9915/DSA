@@ -1,0 +1,43 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1
+
+
+class Solution {
+  public:
+  int min_distance(vector<int>&dist,vector<int>&vis,int n){
+        int min = INT_MAX, min_index;
+     for (int v = 0; v < n; v++)
+            if (vis[v] == false && dist[v] <= min)
+                min = dist[v], min_index = v;
+     
+        return min_index;
+  }
+    void solve(int  src, int n,int m,vector<int>&vis, vector<int>&dist,vector<vector<int>>&edges){
+        dist[src]=0;
+        for(int k=0; k<n-1; k++){
+            int u=min_distance(dist,vis,n);
+            // cout<<u<< " ";
+            vis[u]=1;
+            for(int i=0; i<m; i++){
+                int s=edges[i][0];
+                int d=edges[i][1];
+                int w=edges[i][2];
+                if(s==u and vis[d]==false and w!=0 and dist[d]>dist[u]+w){
+                    dist[d]=dist[u]+w;
+                }
+            }
+        }
+    }
+     vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
+        vector<int>dist(N,INT_MAX);
+        vector<int>vis(N);
+        solve(0,N,M,vis,dist,edges);
+        for(int i=0; i<N; i++){
+            if(dist[i]==INT_MAX)dist[i]=-1;
+        }
+        return dist;
+    }
+    // TIme Complexity ->   O(M * N),
+    // Space Complexity ->  O(N + N),
+
+};
+// Explanation -> Dijkstra Algo.
