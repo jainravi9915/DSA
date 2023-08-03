@@ -1,0 +1,28 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+
+
+//Function to return a list containing elements of left view of the binary tree.
+vector<int> leftView(Node *root)
+{
+    vector<int>res;
+    if(!root)return {};
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        int n=q.size();
+        bool leftElement=false;
+        while(n--){
+            Node* temp=q.front();
+            q.pop();
+            if(!leftElement){
+                res.push_back(temp->data);
+                leftElement=true;
+            }
+            if(temp->left)q.push(temp->left);
+            if(temp->right)q.push(temp->right);
+        }
+    }
+    return res;
+}
+// Time Complexity -> O(N)
+// Space Complexity -> O(N)

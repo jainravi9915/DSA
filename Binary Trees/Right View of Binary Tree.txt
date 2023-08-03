@@ -1,0 +1,52 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1
+
+    //Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root)
+    {
+       vector<int>res;
+       queue<Node*>q;
+       q.push(root);
+       while(!q.empty()){
+           int n=q.size();
+           int rightELement=-1;
+           while(n--){
+               Node* temp=q.front();
+               q.pop();
+               rightELement=temp->data;
+               if(temp->left)q.push(temp->left);
+               if(temp->right)q.push(temp->right);
+           }
+           res.push_back(rightELement);
+       }
+       return res;
+       
+    }
+//Time Complexity -> O(N)
+//Space Complexity -> O(N)
+class Solution
+{
+    public:
+    //Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root)
+    {
+       vector<int>res;
+       queue<Node*>q;
+       q.push(root);
+       while(!q.empty()){
+           int n=q.size();
+           int rightELement=-1;
+           while(n--){
+               Node* temp=q.front();
+               q.pop();
+               rightELement=temp->data;
+               if(temp->left)q.push(temp->left);
+               if(temp->right)q.push(temp->right);
+           }
+           res.push_back(rightELement);
+       }
+       return res;
+       
+    }
+};
+//Time Complexity -> O(N)
+//Space Complexity -> O(N)
