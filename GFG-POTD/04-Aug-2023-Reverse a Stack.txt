@@ -1,0 +1,16 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/reverse-a-stack/1
+
+//Function to reverse stack
+    void Reverse(stack<int> &st){
+        vector<int>res;
+        while(!st.empty()){
+            res.push_back(st.top());
+            st.pop();
+        }
+        for(int x:res){
+            st.push(x);
+        }
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)
+    // Explanatino - store in a vector then push into the stack :) hence will get reverse

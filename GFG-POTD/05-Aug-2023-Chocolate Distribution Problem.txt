@@ -1,0 +1,13 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem3825/1
+
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+        long long  res=INT_MAX;
+        sort(a.begin(),a.end());
+        for(int i=m-1; i<n; i++){
+            res=min(res, a[i]-a[i+1-m]);
+        }
+        return res;
+        
+        
+        // Time Complexity -> O(N*log(N))
+        // Spaec Complexity -> O(1)
