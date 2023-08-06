@@ -1,0 +1,30 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1
+
+//Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+        
+        if(root==NULL)return {};
+        queue<Node*>q;
+        int level=0;
+        q.push(root);
+        vector<int>res;
+        while(!q.empty()){
+            int n=q.size();
+            vector<int>temp;
+            while(n--){
+                Node* node=q.front();
+                q.pop();
+                temp.push_back(node->data);
+                if(node->left)q.push(node->left);
+                if(node->right)q.push(node->right);
+            }
+            if(level%2)reverse(temp.begin(),temp.end());
+            for(int val:temp)
+                res.push_back(val);
+            level++;
+        }
+        return res;
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1

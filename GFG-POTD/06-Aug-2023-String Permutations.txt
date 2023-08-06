@@ -1,0 +1,25 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string-1587115620/1
+
+void solve(string S, int index,vector<string>&res){
+        if(index>=S.size()){
+            res.push_back(S);
+            return ;
+        }
+        for(int i=index; i<S.size(); i++){
+            swap(S[i],S[index]);
+            solve(S,index+1,res);
+            swap(S[i],S[index]);
+            
+        }
+    }
+    vector<string> permutation(string S)
+    {
+        vector<string>res;
+        solve(S,0,res);
+        sort(res.begin(),res.end());
+        return res;
+    }
+    
+    // Time Complexity -> O(N*N!)
+    // Time Complexity -> O(1)
+
