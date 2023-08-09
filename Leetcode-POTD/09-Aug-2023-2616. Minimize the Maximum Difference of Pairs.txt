@@ -1,0 +1,36 @@
+Problem Link -> https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/
+
+  bool possible(vector<int>&nums, int p,int diff){
+        int n=nums.size();
+        for(int i=1; i<n; i++){
+            if(nums[i]-nums[i-1]<=diff){
+                p--;
+                i++; // if i and i-1 and i,i+1 is not valid; to skip next
+            }
+        }
+        return p<=0;
+        
+    }
+    int minimizeMax(vector<int>& nums, int p) {
+        // binary search on search space 
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        int left=0,right=nums[n-1]-nums[0];
+        int res=right;
+        while(left<=right){
+            int mid=(left+right)/2;
+            // possible p pair with diff
+            if(possible(nums,p,mid)){
+                res=mid;
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return res;
+    }
+    // Time Complexity -> O(NlogN)
+    // Space Complexity -> O(1)
+    //observation: binary serah on space
+    // element minimum diff with adjacent in sorted
+    // check for diff with binary search beacause  one index appear in one pair only
