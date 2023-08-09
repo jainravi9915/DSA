@@ -1,0 +1,27 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/largest-prime-factor2601/1
+
+
+long long int largestPrimeFactor(int N){
+        long long int res=-1;
+        for(int i=2; i<=N; ){
+            if(N%i==0){
+                res=i;
+                N=N/i;
+            }else{
+                i++;
+            }
+        }
+        return res;
+    }
+    
+    // Time Complexity -> O(Sqrt(N))
+    // Space Complexity -> O(1)
+    // Observation- once no is divisible by K remove all its divisiblity 
+    // 1. Start
+    // 2. for each i 2 to N
+    // 3.   if N %i ==0 
+    // 4.       then res=i and N=N/i; 
+    // 5.   else
+    // 6.       i++ if not divisible check with other no,
+    // 7. retrun res;
+    // 8. End
