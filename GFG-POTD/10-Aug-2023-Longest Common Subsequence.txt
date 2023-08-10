@@ -1,0 +1,30 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/longest-common-subsequence-1587115620/1
+
+int solve(string &s, string &t, int n,int m,vector<vector<int>>&dp){
+        if(n==0 || m==0)return 0;
+        if(dp[n][m]!=-1)return dp[n][m];
+        int res=0;
+        if(s[n-1]==t[m-1])res= 1+solve(s,t,n-1,m-1,dp);
+        else{
+            res= max(
+                    solve(s,t,n-1,m,dp),
+                    solve(s,t,n,m-1,dp)
+                );
+        }
+        return dp[n][m]=res;
+    }
+    int lcs(int n, int m, string s1, string s2)
+    {   
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        return solve(s1,s2,n,m,dp);
+    }
+    
+    // Time Complexity -> O(n*m)
+    // Space Complexity -> O(n*m)
+    // Explanation using recursion -> 
+    // cases : if lenght is 0 return 0;  if matches return 1+solve(n-1,m-1) else max of solve(n-1),solve(m-1)
+    //1. Start
+    //2. if n==0 || m==0 return 0; any one is empty
+    //3. if char at indexes matches then incerase result leght
+    //4.  else retunr max of skipping char at inde m,n
+    //5. Stop
