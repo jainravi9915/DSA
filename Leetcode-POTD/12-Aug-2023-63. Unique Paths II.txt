@@ -1,0 +1,36 @@
+Problem Link -> https://leetcode.com/problems/unique-paths-ii/description/
+
+    int solve(int i,int j,int m,int n, vector<vector<int>>&grid, vector<vector<int>>&dp){
+        if(i<0 || j<0 || i>=m || j>=n || grid[i][j]!=0)return 0;
+        if(i==m-1 and j==n-1){
+            return 1;
+        }
+        if(dp[i][j]!=-1)return dp[i][j];
+        int temp=grid[i][j];
+        grid[i][j]=2;
+        int down=solve(i+1,j,m,n,grid,dp);
+        int right=solve(i,j+1,m,n,grid,dp);
+        grid[i][j]=temp;
+        return dp[i][j]= down+right;
+        
+    }
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+        return solve(0,0,m,n,obstacleGrid,dp);
+    }
+    // Time Complexity -> O(M*N)
+    // Space Complexity -> O(M*N)
+
+    // Iterate all over possibilites 
+
+    //1. Start    
+    //2. Start from cell 0,0
+    //3. check base condition with safe to move or not return 0
+    //4. if reach destination return 1;
+    //5. mark it visited
+    //5. go down and right 
+    //6. mark unvisited
+    //7. return down +right    
+    //8. END
