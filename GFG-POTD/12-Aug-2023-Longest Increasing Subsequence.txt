@@ -1,0 +1,28 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1
+
+    int longestSubsequence(int n, int a[])
+    {
+       vector<int>res;
+       res.push_back(a[0]);
+       for(int i=1; i<n; i++){
+           if(res.back()<a[i]){
+               res.push_back(a[i]);
+           }else{
+               int index= lower_bound(res.begin(),res.end(),a[i])-res.begin();
+               res[index]=a[i];
+           }
+       }
+       return res.size();
+    }
+    // Time Complexity -> O(n logn)
+    // Space Complexity -> O(N)
+    // Explanantion: as Increasing order is sorted keeping this in mind create a arrray in that sense
+    // 1. Start
+    // 2. Initialzie res array push element at 0th index 
+    // 3. Iterate for all index=1 to n 
+    // 4 .   if last element at res < current element
+    // 5.        add to the result
+    // 6.    else 
+    // 7.        get the index where we can add to result hence get lowerbound index: lower bound will give position >=x
+    // 8.         insert at position 
+    // 9. return res.size()

@@ -1,0 +1,29 @@
+Problem Link -> https://leetcode.com/problems/coin-change-ii/description/
+
+
+int solve(int index, int amount,vector<int>&coins,vector<vector<int>>&dp){
+        if(amount==0)return 1;
+        if(index>=coins.size() || amount<0)return 0;
+        if(dp[index][amount]!=-1)return dp[index][amount];
+        int take=solve(index,amount-coins[index],coins,dp);
+        int not_take=solve(index+1,amount,coins,dp);
+        return dp[index][amount]=take+not_take;
+    }
+    int change(int amount, vector<int>& coins) {
+        vector<vector<int>>dp(coins.size()+1,vector<int>(amount+1,-1));
+        return solve(0,amount,coins,dp);
+    }
+    // Explanation
+        // Time Complexity -> O(amount*N)
+    // Space Complexity -> O(amount*N)
+    // Explanation -> explore all posibilities
+    // 1. Start
+    // 2. if amount==0 return 1;
+    // 3.  if amount < 0 || index>=n) return 0;
+    // 4. we can either consider it or not
+    //   if we take it we can agagin take it :
+    //         take= solve(index, amount-coins[index])
+    // 5. if we not take it we can move ahead
+    //      not_take=solve(index+1,amount )
+    // 6. return take+ not_take
+    // 7. STOP

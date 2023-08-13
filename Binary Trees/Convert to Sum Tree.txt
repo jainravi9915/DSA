@@ -1,0 +1,29 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/transform-to-sum-tree/1
+
+// Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    int solve(Node*root){
+        if(root==NULL)return 0;
+        int left=solve(root->left);
+        int right=solve(root->right);
+        int old_val=root->data;
+        root->data=left+right;
+        return left+right+old_val;
+        
+    }
+    void toSumTree(Node *node)
+    {
+        solve(node);
+    }
+    
+    
+    // Time Complexity -> O(N)
+    // Space Complexiy  -> O(H)
+    // Explanation : calulcate sum of tree with some enhancement 
+    //1. Start
+    //2. if root==null return 0;
+    //3. calulcate left and right
+    //4. store old_val of root
+    //5. update root->val = left+right'
+    //6. return left+right+old+_val;
+    //7. End

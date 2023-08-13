@@ -1,0 +1,23 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/nth-fibonacci-number1335/1
+
+
+    #define mod 1000000007
+    int nthFibonacci(int n){
+        vector<int>dp(n+1,0);
+        dp[0]=0;
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=3; i<=n; i++){
+            dp[i]=(dp[i-1]+dp[i-2])%mod;
+        }
+        return dp[n-1];
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(N)
+    // Explanation - c=a+b a,b are previous two numbers using and a=b,b=c 
+    //1. Start
+    //2. create a vector to store previous result
+    //3. Intialization for 0 1,2 index
+    //4. iterate 2 equal to n for(i=3 to i<=n)
+    //5.    curr_val= addition of previous two values
+    //6. return val // used as 1 based indexes return n-1;
