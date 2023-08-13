@@ -1,0 +1,35 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+
+
+
+vector<int> diagonal(Node *root)
+{
+   vector<int>res;
+   queue<Node*>q;
+   q.push(root);
+   while(!q.empty()){
+       Node*temp=q.front();
+       q.pop();
+       while(temp){
+           res.push_back(temp->data);
+           if(temp->left){
+               q.push(temp->left);
+           }
+           temp=temp->right;
+       }
+   }
+   return res;
+}
+// Time Complexity ->  O(N)
+// Space Complexity -> O(N)
+// Explanation Diagonal : print in right side element and in q push ionly left
+//1. Start 
+//2. Intitailze q with root
+//3. while q is not empty
+//4 .   take out front of q
+//5.    while iterate till temp is exist
+//6.        push temp to result
+//7.        check if left eixst insert into q\
+//8.        temp =temp->right : as go to tight diagoal
+//9. return res
+//10. End

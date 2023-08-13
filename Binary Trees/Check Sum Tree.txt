@@ -1,0 +1,28 @@
+Problem Link ->https://practice.geeksforgeeks.org/problems/sum-tree/1
+
+int check(Node*root, bool &flag){
+        if(root==NULL)return 0;
+        if(root->left==NULL and root->right==NULL)return  root->data;;
+        int left=check(root->left,flag);
+        int right=check(root->right,flag);
+        
+        if(left+right != root->data){
+            flag=false;
+        }
+        return root->data + left+right;
+    }
+    bool isSumTree(Node* root)
+    {
+        bool flag=true;
+        check(root,flag);
+        return flag;
+    }
+    // Explanation calculatte sum of tree with two condigition that left+rigth must equal to root->Data, and for leaf node return root->data
+    //1. Start
+    //2. Intialize flag=true ,call check funciton
+    //3. if root if null return 0;
+    //4. if root is lead retunr root->data
+    //5. calulate left and right
+    //6. if left +right != root-Ddata then it is not sumTree
+    //7. return root->Data+left+right
+    //8. End
