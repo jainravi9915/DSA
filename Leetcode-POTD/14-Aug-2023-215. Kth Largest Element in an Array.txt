@@ -1,0 +1,17 @@
+Problem Link ->https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+
+int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int,vector<int>,greater<int>>minHeap;
+        for(int x:nums){
+            minHeap.push(x);
+            if(minHeap.size()>k)minHeap.pop();
+        }
+        return minHeap.empty()?-1 : minHeap.top();
+    }
+    // Explanation -> using minHeap ; minHeap of size k has K th largest element at top
+    //1. Start
+    //2. Declare minHeap 
+    //3. Iterate all over nums
+    //4.    push to minHeap
+    //5.    if minHeap size is >k then remove that element
+    //6.  return top of minHeap;

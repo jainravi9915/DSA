@@ -1,0 +1,25 @@
+Problem Link->https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1
+
+    vector<int> singleNumber(vector<int> nums) 
+    {
+        map<int,int>mp;
+        vector<int>res;
+        for(int x:nums){
+            mp[x]++;
+        }
+        for(auto p:mp){
+            if(p.second==1){
+                res.push_back(p.first);
+            }
+        }
+        return res;
+    }
+    // Time Complexity -> O(nlogn)
+    /// Space Complexity ->O(N)
+    // Explanaion store the count of element and return element with count 1
+    //1. Start
+    //2. Intialize Map , result ; ,map to store count, res to store result;
+    //3. iterate over nums and store the count
+    //4. iterate over map and store to result for element with frequency 1
+    //5. return result
+    //6. End
