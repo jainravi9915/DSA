@@ -1,0 +1,34 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/flip-bits0240/1
+
+
+    int maxOnes(int a[], int n)
+    {
+        int cons_zero=0;
+        int max_cons_zero=0,ones=0;
+        for(int i=0; i<n; i++){
+            if(a[i]==0){
+                cons_zero++;
+            }else{
+                ones++;
+                cons_zero--;
+            }
+            max_cons_zero=max(cons_zero,max_cons_zero);
+            // only zeros consecutive
+            cons_zero=max(0,cons_zero);
+        }
+        return ones+max_cons_zero;      
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity -> O(1)
+    // Explanation -> flip subarrray with all zeros and add no of 1's;
+    //1. Start
+    //2. Initailze consecitve_zeros,max_consecitve_zeros,ones
+    //3. Iterate over array
+    //4.    if a[i]==0 
+    //5.           consecitve_zeros++; increse count of consecitve_zeros
+    //6.     else 
+    //7.          ones++; add it to ones
+    //8.     consecitve_zeros--; increse count of consecitve_zeros
+    //9.      take count of max consecitve_zeros
+    //10.      check that cons_zeros cannot less than 0; as no operation performed
+    //11.  return ones+max_consecutive_zeros

@@ -1,0 +1,25 @@
+Problem Link -> https://leetcode.com/problems/partition-list/description/
+
+  ListNode* partition(ListNode* head, int x) {
+        ListNode*  first=new ListNode(0);
+        ListNode*  second=new ListNode(0);
+        ListNode* f=first,*start=head,*s=second;
+
+        while(start){
+            if(start->val<x){
+                f->next=start;
+                f=f->next;
+            }else{
+                s->next=start;
+                s=s->next;
+            }
+            start=start->next;
+        }
+        s->next=NULL; // second list last point to NULLL
+        f->next=second->next; // connect both partition
+        head=first->next;
+        return head;        
+    }
+    // Time Complexity -> O(N)
+    // Space Complexity ->O(1)
+    // Explanation -> iterate over list make two partition and connect them
