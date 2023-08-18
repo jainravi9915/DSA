@@ -1,0 +1,26 @@
+Problem Link ->https://practice.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1
+
+    vector<int> leaders(int a[], int n){
+        vector<int>res;
+        int maximum=-1;
+        for(int i=n-1; i>=0; i--){
+            if(a[i]>=maximum){
+                res.push_back(a[i]);
+            }
+            maximum=max(maximum,a[i]);
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+    // Time Complexity -> O(N)
+    //  Space Complexity -> O(N)
+    //Explanation - > Iterate form right end and find till index maximum if curr is maximuim store in result 
+    //1. Start
+    //2. Intialize res,maximum 
+    //3 .Iterate from right end 
+    //4.    if current >= maximum 
+    //5.        add  current element to result
+    //6.    calculate maximum element till ith index
+    //7. reverse the res
+    //8. return res
+    //9. End
