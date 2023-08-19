@@ -1,0 +1,40 @@
+Problem Link-> https://leetcode.com/problems/maximal-network-rank/
+
+    int maximalNetworkRank(int n, vector<vector<int>>& roads) {
+        vector<vector<int>>adjMatrix(n,vector<int>(n,0));
+        for(auto p:roads){
+            int u=p[0],v=p[1];
+            adjMatrix[u][v]=1;
+            adjMatrix[v][u]=1;
+        }
+        int res=0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                int cnt=0;
+                for(int x:adjMatrix[i]){
+                    if(x==1)cnt++;
+                }
+                for(int x:adjMatrix[j]){
+                    if(x==1)cnt++;
+                }
+                if(adjMatrix[i][j])cnt--;
+                // cout<<i<<" -> "<<j<<" "<<"cnt = "<<cnt<<endl;
+                res=max(res,cnt);
+            }
+        }
+        return res;
+    }
+    // Time Complexity -> O(N*N*N)
+    // Space Complexity -> O(N*N)
+    // Explanation- iterate all over possible combination of path (i,j) and check how many edges  are present
+    //1. Start
+    //2. Intialize adjMatrix  with roads 1 if path exists from u to v
+    //3. Intialize res=0
+    //4. Try all possibe combinartion of path i.e n*n
+    //5.    Initalize count ;  i.e count rank 
+    //6.    count number of edges from that i
+    //7.    count number of edges from that j
+    //8.    decrease count by 1 if exist path from i to j
+    //9.    calculate res as max of res,count 
+    //10. return res
+    //11. End
