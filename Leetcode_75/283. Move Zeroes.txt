@@ -1,0 +1,30 @@
+Problem Link -> https://leetcode.com/problems/move-zeroes/description/?envType=study-plan-v2&envId=leetcode-75
+
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+        int i=0,j=0;
+        while(j<n){
+            if(nums[j]!=0){
+                nums[i]=nums[j];
+                i++;
+            }
+            j++;
+        }
+        while(i<n){
+            nums[i++]=0;
+        }
+    }
+    /*  Time Complexity -> O(n) 
+        Space Complexity -> O(1)
+        Approach  -> Using Two Pointer 
+        Explanation -> use two pointer and iterate over arrray and when getting current element as !=0 copy to ith pointer and move i++,
+         j++ else only j++ and replace all elemnts from ith pointer to end to zeros
+        
+        1. Start
+        2. Intialize i,j pointers
+        3. Iterate over array here we are using while loop , can use for loop also
+        4.      check if current i.e  value at  jth is !=0 then copy to ith index and move ith pointer i.e i++ 
+        5.      move jth pointer i.e ++
+        6.  form i to end replace all elements with zeros as move to zeros to end and keeping relative order 
+        7. End
+    */

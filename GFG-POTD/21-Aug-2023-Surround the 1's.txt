@@ -1,0 +1,39 @@
+Problem Link -> https://practice.geeksforgeeks.org/problems/surround-the-1s2505/1
+    bool isSafe(int i,int j,int m,int n,vector<vector<int>>&matrix){
+        if(i<0 || j<0 || i>=m || j>=n || matrix[i][j]!=0)return false;
+        return true;
+        
+    }
+    int Count(vector<vector<int> >& matrix) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+        int res=0;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(matrix[i][j]==0)continue;
+                int zeros=0;
+                if(isSafe(i+1,j,m,n,matrix))zeros++;
+                if(isSafe(i,j+1,m,n,matrix))zeros++;
+                if(isSafe(i-1,j,m,n,matrix))zeros++;
+                if(isSafe(i,j-1,m,n,matrix))zeros++;
+                if(isSafe(i+1,j+1,m,n,matrix))zeros++;
+                if(isSafe(i-1,j-1,m,n,matrix))zeros++;
+                if(isSafe(i+1,j-1,m,n,matrix))zeros++;
+                if(isSafe(i-1,j+1,m,n,matrix))zeros++;
+                if(zeros and zeros%2==0){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+    /* Time Complexity -> O(M*N) // more specific O(M*N*8)  -> M*N matrix and 8 conditions to check 
+       Space Complexity -> O(1)
+       Explanation  : go to each cell and check if it is one and have even zeros
+    1. Start
+    2. get m,n i.e. row and col and intialze result
+    3. Iterate over each cell of matrix and calculate isSafe condition and add to result
+    4. return res
+    5. End
+    
+    */
