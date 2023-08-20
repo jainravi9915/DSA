@@ -1,0 +1,33 @@
+Problem Link -> https://leetcode.com/problems/is-subsequence/
+
+    bool isSubsequence(string s, string t) {
+        int m=s.size();
+        int n=t.size();
+        if(m>n)return false;
+        int i=0,j=0;
+        while(j<n){
+            if(s[i]==t[j]){
+                i++;
+            }
+            j++;
+        }
+        return i==m;
+    }
+    /*
+    Time Complexity -> O(N)
+    Space Complexity -> O(1)
+
+    Approach -> Using tow pointer
+
+    Explanation -> iterate over second string and check if first exist or not 
+        1.Start
+        2.if len of s > len of t then return false; i.e first string must less than equal to second string
+        3. Initalize tow pointers i,j ; i for s, j for t
+        4. Iterate over second string 
+        5.      check if s[i]==s[j] i.e match found for ith index 
+                    then move ith pointer i++
+                mode jth pointer j++    
+        6. return true if i==m i.e ith pointer must be end of first string
+        7.End
+    */
+    
