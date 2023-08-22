@@ -1,0 +1,11 @@
+Problem Link -> https://leetcode.com/problems/excel-sheet-column-title/description/
+    string convertToTitle(int columnNumber) {
+        string res;
+        while(columnNumber){
+            res= char('A'+ (columnNumber-1)%26)+res;
+            columnNumber= (columnNumber-1)/26;
+        }
+        return res;   
+    }
+    // Time Complexity -> O(N)
+    //Space Complexity ->O(1)
