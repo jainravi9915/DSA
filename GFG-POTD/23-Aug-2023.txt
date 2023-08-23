@@ -1,0 +1,57 @@
+Problem Link ->https://practice.geeksforgeeks.org/problems/find-the-string-in-grid0111/1
+
+
+bool solve(vector<vector<char>>&grid, int index,int i,int j,int m,int n,string &word){
+        // safe condition 
+        if(i<0 || j<0 ||i>=m || j>=n || grid[i][j]!=word[index])return false;
+        // if reach till last index that means word exists
+        if(index==word.size()-1)return true;
+        // not use same cell again
+        char temp=grid[i][j];
+        bool flag=false;
+        // grid[i][j]='#';
+        if(solve(grid,index+1,i+1,j,m,n,word) ||
+            solve(grid,index+1,i,j+1,m,n,word) ||
+            solve(grid,index+1,i-1,j,m,n,word) ||
+            solve(grid,index+1,i,j-1,m,n,word) ||
+            solve(grid,index+1,i+1,j+1,m,n,word) ||
+            solve(grid,index+1,i-1,j-1,m,n,word) ||
+            solve(grid,index+1,i+1,j-1,m,n,word) ||
+            solve(grid,index+1,i-1,j+1,m,n,word) )
+        flag=true;
+        // storing orignal value
+        // grid[i][j]=temp;
+        return flag;
+        
+    }
+	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+	    vector<vector<int>>res;
+	    int m =grid.size();
+	    int n=grid[0].size();
+	    for(int i=0; i<m; i++){
+	        for(int j=0; j<n; j++){
+	            if(grid[i][j]==word[0]){
+	               // cout<<i<<" "<<j<<endl;
+	                if(solve(grid,0,i,j,m,n,word)){
+	                    res.push_back({i,j});
+	                }            
+	            }   
+	        }
+	    }
+	    return res;
+	}
+	
+	// Time Complexity ->O(M*N*8)
+	// Space Comeplexity -> O(M*N ) fucntion call
+	// Expalantion ->using dfs appraoch backtracking
+	// 1. Start
+	// 2. iterate all over grid and start seaching for word where first char match
+	// 3.       check in solve () 
+	// 4.           if  safe to move ahead else return false
+	// 5.               if index is at n-1 i.e match till last index then return true found match
+	// 6.               store  current element in temp as same cell cannot used twice
+	// 7.               check for all directions any is true return true
+	// 8.               store orignal value at cell
+	// 9.          solve return true then store that index in res 
+	// 10. return res
+	// 9. END

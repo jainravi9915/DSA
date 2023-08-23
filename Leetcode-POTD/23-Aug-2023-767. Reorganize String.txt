@@ -1,0 +1,43 @@
+Problem Link -> https://leetcode.com/problems/reorganize-string/description/
+
+#define p pair<int ,char>
+   
+    string reorganizeString(string s) {
+        map<char,int>mp;
+        priority_queue<p>pq;
+        for(char c:s){
+            mp[c]++;
+        }
+        for(auto pr:mp){
+            pq.push({pr.second,pr.first});
+        }
+        string res;
+        while(!pq.empty()){
+            p x=pq.top(); pq.pop();
+            p y;
+            if(!pq.empty()){
+                y=pq.top();
+                pq.pop();
+            }else{
+                if(x.first>1)return "";
+                res+=x.second;
+                break;
+                
+            }
+            res+=x.second;
+            res+=y.second;
+            if(x.first-1>0){
+                pq.push({ x.first-1,x.second });
+            }
+            if(y.first-1>0){
+                
+                pq.push({ y.first-1,y.second});
+            }
+        }
+        return res;
+    }
+/*
+    Time Complexity -> O(N) 
+    Space Complexity -> O(N)  
+    Expalantion-> using maxHeap not two adjacent same,
+*/
