@@ -1,0 +1,64 @@
+Problem Link ->https://practice.geeksforgeeks.org/problems/multiply-two-strings/1
+    string multiplyStrings(string s1, string s2) {
+            int m=s1.size(),n=s2.size();
+            vector<int>res(m+n);
+            int a=1,b=1;
+            if(s1[0]=='-'){
+                s1=s1.substr(1);
+                a=0;
+            }
+            if(s2[0]=='-'){
+                s2=s2.substr(1);
+                b=0;
+            }
+            if(s1=="0" || s2=="0")return "0";
+            int k=res.size();
+            for(int i=s1.size()-1; i>=0; i--){
+                k--;
+                int  carry=0;
+                int end=k;
+                int product=0;
+                for(int j=s2.size()-1; j>=0; j--){
+                     product=(s1[i]-'0')*(s2[j]-'0')+carry+res[end];
+                     int result=product%10;
+                     carry=product/10;
+                     res[end]=result;
+                     end--;
+                }
+                res[end]=carry;
+            }
+            
+            string ans="";
+            for(int x:res){
+                if(ans.size()==0 and x==0)continue;
+                ans=ans+to_string(x);
+            }
+            if(a!=b)ans="-"+ans;
+            return ans.size()==0 ? "0" :ans;
+        }
+        
+        /*
+            Time Comeplexity -> O(M*N)
+            Space Comeplexity -> O(M+N)
+            Explanation as using simple maths lenght of result cannot exceed m+n and for every iterative move pointer from end
+            1.  Start
+            2.  Intialize res arrray opf len m+n
+            3.  check of negative num and take only digits with no signs
+            4.  check if anyone of them is 0 then retrun 0 ; as multiply by 0 gives 0
+            5.  Intlaize k=m+n
+            6.  Iterate over first string from end
+            7.      k-- as at every itearation we need to move right pointer : 
+            8.      Intilaize carry , product, end to 0,0,k respectively
+            9.      iterate over second string from end 
+            10.         calulcate product with carry and res[end] if any value previously calulated for that index
+            11.         curr_val=prodcut%10 ; only value at ones palce
+            12.         carry = prodcut/10; carry if value at tens place
+            13.     res[end]=carry ; carry forward the carry ; after calulation for every digit 
+            14. storing back to string as need to return string with no leading 0 if >0
+            15. if both signs are opposite then  ans=-ans: +*-=-
+            16. return ans
+            17. End
+            
+            
+        
+        */
